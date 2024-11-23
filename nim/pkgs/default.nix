@@ -1,10 +1,15 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   imports = [ inputs.fp.flakeModules.easyOverlay ];
 
   perSystem =
-    { final, self', ... }:
+    { final, lib, self', system, ... }:
     {
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowListedLicenses = with lib.licenses; [ cc-by-nc-sa-40 ];
+      };
+
       devShells.default = final.mkShell {
         inputsFrom = [ self'.packages.default ];
         packages = [ final.nimble ];

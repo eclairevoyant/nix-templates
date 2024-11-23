@@ -11,7 +11,7 @@ buildNimPackage (finalAttrs: rec {
   version = "0.0.1";
 
   src = fs.toSource {
-    root = ./.;
+    root = ./..;
     fileset = fs.unions [
       (fs.fileFilter (
         file:
