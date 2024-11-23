@@ -17,6 +17,10 @@
 
       flake = {
         templates = {
+          nim = {
+            path = ./nim;
+            description = "minimal nim template";
+          };
           nixos = {
             path = ./nixos;
             description = "minimal nixos template";
