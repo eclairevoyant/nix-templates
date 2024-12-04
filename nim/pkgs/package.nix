@@ -20,6 +20,12 @@ buildNimPackage (finalAttrs: rec {
           "nim"
         ]
       ) ../src)
+      (fs.fileFilter (
+        file:
+        builtins.any file.hasExt [
+          "nimble"
+        ]
+      ) ./..)
     ];
   };
 
