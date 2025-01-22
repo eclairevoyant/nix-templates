@@ -1,13 +1,19 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 {
   imports = [ inputs.fp.flakeModules.easyOverlay ];
 
   perSystem =
-    { final, lib, self', system, ... }:
+    {
+      final,
+      lib,
+      self',
+      system,
+      ...
+    }:
     {
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
-        config.allowListedLicenses = with lib.licenses; [ cc-by-nc-sa-40 ];
+        config.allowlistedLicenses = with lib.licenses; [ cc-by-nc-sa-40 ];
       };
 
       devShells.default = final.mkShell {
