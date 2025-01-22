@@ -31,7 +31,20 @@
       perSystem =
         { pkgs, ... }:
         {
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = pkgs.writeShellApplication {
+            name = "nixfmt-wrapper";
+
+            runtimeInputs = [
+              pkgs.coreutils-full
+              pkgs.fd
+              pkgs.nixfmt-rfc-style
+            ];
+
+            text = ''
+              realpath "$@"
+              fd "$@" -t f -e nix -x nixfmt '{}'
+            '';
+          };
         };
     };
 }
