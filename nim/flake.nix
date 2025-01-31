@@ -18,7 +18,22 @@
       perSystem =
         { pkgs, ... }:
         {
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = pkgs.writeShellApplication {
+            name = "nimpretty-nixfmt-wrapper";
+
+            runtimeInputs = [
+              pkgs.coreutils-full
+              pkgs.fd
+              pkgs.nim
+              pkgs.nixfmt-rfc-style
+            ];
+
+            text = ''
+              realpath "$@"
+              fd "$@" -t f -e nix -x nixfmt '{}'
+              fd "$@" -t f -e nim -x nimpretty '{}'
+            '';
+          };
         };
     };
 }
