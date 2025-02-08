@@ -18,6 +18,16 @@
               nixpkgs.hostPlatform = "x86_64-linux";
               system.stateVersion = "24.05";
 
+              users = {
+                mutableUsers = false;
+                users.test = {
+                  password = "meow";
+                  isNormalUser = true;
+                  group = "wheel";
+                  createHome = true;
+                };
+              };
+
               # custom config here
             }
           )
