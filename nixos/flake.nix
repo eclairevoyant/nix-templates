@@ -1,14 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    ndg = {
-      url = "github:feel-co/ndg";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
-    { nixpkgs, ndg, ... }:
+    { nixpkgs, ... }:
     {
       nixosConfigurations.test = nixpkgs.lib.nixosSystem {
         modules = [
@@ -19,10 +15,7 @@
 
               boot.loader.grub.enable = false;
               fileSystems."/".device = "nodev";
-              nixpkgs = {
-                hostPlatform = "x86_64-linux";
-                overlays = [ ndg.overlays.default ];
-              };
+              nixpkgs.hostPlatform = "x86_64-linux";
               system.stateVersion = "24.05";
 
               users = {
