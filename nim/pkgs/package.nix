@@ -33,8 +33,6 @@ buildNimPackage (finalAttrs: rec {
     pandoc
   ];
 
-  hardeningEnable = [ "pie" ];
-
   postBuild = ''
     pandoc -s -o ${finalAttrs.pname}.1 doc/${pname}.man1.md
   '';
