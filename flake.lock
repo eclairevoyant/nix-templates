@@ -1,32 +1,12 @@
 {
   "nodes": {
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1769996383,
-        "narHash": "sha256-AnYjnFWgS49RlqX7LrC4uA+sCCDBj0Ry/WOJ5XWAsa0=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "57928607ea566b5db3ad13af0e57e921e6b12381",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771369470,
-        "narHash": "sha256-QuLskcmhZmccr+kp9DhjrH7AkFvA9mf+dZdOQfNq/KI=",
-        "rev": "0182a361324364ae3f436a63005877674cf45efb",
+        "lastModified": 1783224372,
+        "narHash": "sha256-FGQ8TfSm9WviNE/fQAWsKs+y4GkX8fU4EScewpw54Y8=",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre948083.0182a3613243/nixexprs.tar.xz?lastModified=1771369470&rev=0182a361324364ae3f436a63005877674cf45efb"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1027867.d407951447dc/nixexprs.tar.xz?lastModified=1783224372&rev=d407951447dcd00442e97087bf374aad70c04cea"
       },
       "original": {
         "type": "tarball",
@@ -35,7 +15,6 @@
     },
     "root": {
       "inputs": {
-        "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs"
       }
     }

@@ -1,50 +1,39 @@
 {
-  description = "simple nix templates";
-
-  inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-  };
+  inputs.nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
 
   outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+    { nixpkgs, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.system;
+    in
+    {
+      formatter.${system} = pkgs.writeShellApplication {
+        name = "nimpretty-nixfmt-wrapper";
 
-      flake = {
-        templates = {
-          nim = {
-            path = ./nim;
-            description = "minimal nim template";
-          };
-          nixos = {
-            path = ./nixos;
-            description = "minimal nixos template";
-          };
-        };
+        runtimeInputs = [
+          pkgs.coreutils-full
+          pkgs.fd
+          pkgs.nim
+          pkgs.nixfmt
+        ];
+
+        text = ''
+          realpath "$@"
+          fd "$@" -t f -e nix -x nixfmt '{}'
+          fd "$@" -t f -e nim -x nimpretty '{}'
+        '';
       };
 
-      perSystem =
-        { pkgs, ... }:
-        {
-          formatter = pkgs.writeShellApplication {
-            name = "nixfmt-wrapper";
-
-            runtimeInputs = [
-              pkgs.coreutils-full
-              pkgs.fd
-              pkgs.nixfmt-rfc-style
-            ];
-
-            text = ''
-              realpath "$@"
-              fd "$@" -t f -e nix -x nixfmt '{}'
-            '';
-          };
+      templates = {
+        nim = {
+          path = ./nim;
+          description = "minimal nim template";
         };
+        nixos = {
+          path = ./nixos;
+          description = "minimal nixos template";
+        };
+      };
     };
 }
