@@ -5,6 +5,7 @@
 !/default.nix
 !/flake.nix
 !/flake.lock
+!/package.nix
 
 !/pkgs/
 /pkgs/*
