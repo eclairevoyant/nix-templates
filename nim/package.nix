@@ -46,6 +46,6 @@ buildNimPackage (finalAttrs: rec {
     homepage = "https://github.com/eclairevoyant/${pname}";
     license = lib.licenses.cc-by-nc-sa-40;
     mainProgram = pname;
-    platforms = lib.platforms.linux;
+    platforms = with lib.platforms; linux ++ darwin;
   };
 })
